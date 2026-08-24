@@ -1,0 +1,26 @@
+Voice-Operated Robotic Telemetry & Execution eXchange
+
+[ User Voice Command ]
+                 │
+                 ▼
+     [ VC-02 Offline AI Module ]
+   (Local Acoustic Decoding - Zero Latency)
+                 │
+                 │ UART (GPIO 16 / 17)
+                 ▼
+       ┌───────────────────┐
+       │   Master ESP32    │
+       │ (Central Logic &  │
+       │  Command Routing) │
+       └─────────┬─────────┘
+                 │
+  ┌──────────────┼──────────────┬──────────────┐
+  │              │              │              │
+  ▼              ▼              ▼              ▼
+[Locomotion]  [Audio Speech]   [OLED Display]  [IoT Cloud Bridge]
+  L298N 4WD    DFPlayer Mini    Arduino Uno       Blynk Cloud
+  DC Motors      Speaker        SSD1306 OLED          │
+ (Local GPIO)  (Serial UART)   (Serial UART)          ▼
+                                              [Slave ESP8266 NodeMCU]
+                                              ├── 4-Channel Relays
+                                              └── DHT22 Climate Sensor
