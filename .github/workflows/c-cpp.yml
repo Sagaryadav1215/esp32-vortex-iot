@@ -1,23 +1,16 @@
-name: C/C++ CI
+name: Arduino CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile Sketches
+        uses: ArminJo/arduino-test-compile@v3
+        with:
+          arduino-board-fqbn: esp32:esp32:esp32
+          platform-default-debug-level: none
